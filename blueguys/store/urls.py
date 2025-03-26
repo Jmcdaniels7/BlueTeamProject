@@ -7,4 +7,5 @@ urlpatterns = [
     path('store/register/', views.register, name='register'),
     path('store/login/', views.login, name='login'),
     path('store/logout/', views.logout, name='logout'),
+    path('store/chatbot/', views.chatbot, name='chatbot'),
 ]

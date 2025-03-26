@@ -65,4 +65,3 @@ def register(request):
             return redirect('register')
     else:
         return render(request, 'store/register.html')
-
