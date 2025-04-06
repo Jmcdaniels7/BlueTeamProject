@@ -1,36 +1,36 @@
 from django.shortcuts import render, redirect
 from django.utils import timezone
 from django.contrib.auth.models import User, auth
-from django.contrib import messages 
+from django.contrib import messages
+from .models import Item
 
-# this is a view to what page opens when the website is first visited
+# This is a view to what page opens when the website is first visited
 def home(request):
     return render(request, 'store/home.html', {})
 
 # This is for the home button on base.html to work
 def homepage(request):
     return render(request, 'store/home.html', {})
-   
 
-#login view
+# Login view
 def login(request):
-    if request.method =='POST':
+    if request.user.is_authenticated:
+        return redirect('home')  # Redirect if already logged in
+    if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
 
-        user = auth.authenticate(username=username,password=password)
-
+        user = auth.authenticate(username=username, password=password)
         if user is not None:
             auth.login(request, user)
             return redirect('/')
         else:
-            messages.info(request, 'Invalid login, username or password is not registered')
+            messages.info(request, 'Invalid login, username or password is incorrect')
             return redirect('login')
-
     else:
         return render(request, 'store/login.html')
-    
-#logout view
+
+# Logout view
 def logout(request):
     auth.logout(request)
     return redirect('/')
@@ -47,13 +47,13 @@ def register(request):
 
         if password == confirmpassword:
             if User.objects.filter(email=email).exists():  # checks for existing email
-                messages.info(request, 'Email is already in use.') 
-                return redirect('register') #redirects the page back to register.html with message
+                messages.info(request, 'Email is already in use.')
+                return redirect('register')  # Redirects back to register.html with message
             elif User.objects.filter(username=username).exists():
                 messages.info(request, 'Username is already in use.')
                 return redirect('register')
             else:
-                #This saves a user in the database
+                # Saves a user in the database
                 user = User.objects.create_user(
                     first_name=firstname, last_name=lastname, email=email, password=password, username=username
                 )
@@ -66,3 +66,7 @@ def register(request):
     else:
         return render(request, 'store/register.html')
 
+# Store page view
+def store_page(request):
+    items = Item.objects.all()  # Get all items from the database
+    return render(request, 'store/store_page.html', {'items': items})
