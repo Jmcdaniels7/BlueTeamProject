@@ -1,0 +1,22 @@
+{% extends 'store/base.html' %}
+
+{% block content %}
+    <div class="container">
+        <h1>Store Items</h1>
+        <div class="row">
+            {% for item in items %}
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img src="{{ item.image.url }}" class="card-img-top" alt="{{ item.title }}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ item.title }}</h5>
+                            <p class="card-text">{{ item.description }}</p>
+                            <p><strong>${{ item.price }}</strong></p>
+                            <button class="btn btn-primary">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
