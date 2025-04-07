@@ -10,6 +10,9 @@ def home(request):
 # This is for the home button on base.html to work
 def homepage(request):
     return render(request, 'store/home.html', {})
+
+def chatbot(request):
+    return render(request, 'store/chatbot.html',{})
    
 
 #login view
