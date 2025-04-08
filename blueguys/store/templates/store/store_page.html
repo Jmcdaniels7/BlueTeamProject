@@ -8,10 +8,10 @@
         <div class="col-md-3 sidebar rounded p-3">
             <h3 class="text-center">Categories</h3>
             <ul class="list-unstyled">
-                <li><a href="{% url 'store-page' %}">All Items</a></li>
-                <li><a href="{% url 'store-page' %}?category=Jewelry">Jewelry</a></li>
-                <li><a href="{% url 'store-page' %}?category=Home Goods">Home Goods</a></li>
-                <li><a href="{% url 'store-page' %}?category=Handmade">Handmade</a></li>
+                <li><a href="{% url 'store_page' %}">All Items</a></li>
+                <li><a href="{% url 'store_page' %}?category=Jewelry">Jewelry</a></li>
+                <li><a href="{% url 'store_page' %}?category=Home Goods">Home Goods</a></li>
+                <li><a href="{% url 'store_page' %}?category=Handmade">Handmade</a></li>
             </ul>
         </div>
 
@@ -20,7 +20,7 @@
             <h1 class="mb-4" style="color: #a29bfe;">Store Items</h1>
 
             <!-- Search Bar -->
-            <form method="GET" action="{% url 'store-page' %}" class="mb-4 d-flex" role="search">
+            <form method="GET" action="{% url 'store_page' %}" class="mb-4 d-flex" role="search">
                 <input type="text" name="q" class="form-control me-2" placeholder="Search items..." value="{{ request.GET.q }}">
                 <button class="btn btn-primary" type="submit">Search</button>
             </form>
@@ -41,7 +41,7 @@
                             <button class="btn btn-primary mt-auto">Add to Cart</button>
 
                             <!-- Make the whole card clickable -->
-                            <a href="{% url 'item-detail' item.id %}" class="stretched-link"></a>
+                            <a href="{% url 'item_detail' item.id %}" class="stretched-link"></a>
                         </div>
                     </div>
                 </div>
