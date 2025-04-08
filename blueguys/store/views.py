@@ -1,7 +1,9 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import timezone
 from django.contrib.auth.models import User, auth
-from django.contrib import messages 
+from django.contrib import messages
+from .models import Item
+
 
 # this is a view to what page opens when the website is first visited
 def home(request):
@@ -15,7 +17,7 @@ def chatbot(request):
     return render(request, 'store/chatbot.html',{})
    
 
-#login view
+# Login view
 def login(request):
     if request.method =='POST':
         username = request.POST['username']
@@ -32,8 +34,8 @@ def login(request):
 
     else:
         return render(request, 'store/login.html')
-    
-#logout view
+
+# Logout view
 def logout(request):
     auth.logout(request)
     return redirect('/')
@@ -49,9 +51,9 @@ def register(request):
         confirmpassword = request.POST['confirmpassword']
 
         if password == confirmpassword:
-            if User.objects.filter(email=email).exists():  # checks for existing email
-                messages.info(request, 'Email is already in use.') 
-                return redirect('register') #redirects the page back to register.html with message
+            if User.objects.filter(email=email).exists(): # checks for existing email
+                messages.info(request, 'Email is already in use.')
+                return redirect('register')  #redirects the page back to register.html with message
             elif User.objects.filter(username=username).exists():
                 messages.info(request, 'Username is already in use.')
                 return redirect('register')
@@ -68,3 +70,17 @@ def register(request):
             return redirect('register')
     else:
         return render(request, 'store/register.html')
+    return render(request, 'store/register.html')
+
+# Store page with optional search
+def store_page(request):
+    query = request.GET.get('q')
+    if query:
+        items = Item.objects.filter(title__icontains=query)
+    else:
+        items = Item.objects.all()
+    return render(request, 'store/store_page.html', {'items': items})
+
+def item_detail(request, id):
+    item = get_object_or_404(Item, pk=id)
+    return render(request, 'store/item_detail.html', {'item': item})
