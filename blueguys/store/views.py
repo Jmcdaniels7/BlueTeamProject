@@ -13,6 +13,10 @@ def home(request):
 def homepage(request):
     return render(request, 'store/home.html', {})
 
+def chatbot(request):
+    return render(request, 'store/chatbot.html',{})
+   
+
 # Login view
 def login(request):
     if request.method =='POST':
@@ -64,6 +68,8 @@ def register(request):
         else:
             messages.info(request, 'Passwords do not match.')
             return redirect('register')
+    else:
+        return render(request, 'store/register.html')
     return render(request, 'store/register.html')
 
 # Store page with optional search
