@@ -1,7 +1,94 @@
 {% extends 'store/base.html' %}
 
 {% block content %}
-<section>
+
+<div class="msg-container">
+  <div class="msg-header">
+    <div class="msg-profile">
+      <img src="helpimg1.png" class="msgimg" />
+      <p class="username">User name</p>
+    </div>
+  </div>
+  <div class="chat-page">
+    <div class="msg-inbox">
+      <div class="chats">
+        <div class="msg-page" id="chat-area">
+          <div class="recieved-chats">
+            <div class="recieved-chats-img">
+              <img src="ai_img.png">
+            </div>
+            <div class="recieved-msg">
+              <div class="recieved-msg-inbox">
+                <p>
+                  Hello! How can I help you?
+                </p>
+                <span class="time" id="msg-time"></span>
+                <script>
+                  const timeNow = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                  //should print the time the message is sent, shouldn't*** update over time.
+                  document.getElementById("msg-time").textContent = "sent at: " + timeNow;
+                </script>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="msg-bottom">
+      <div class="input-group">
+        <input type="text" class="form-control" id= "chat-input" placeholder="Type your question!" />
+        <button class="send-btn" id="send-btn" aria-label="Send">
+          <i class="bi bi-send"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  window.addEventListener("DOMContentLoaded", function () {
+    const sendBtn = document.getElementById("send-btn");
+    const input = document.getElementById("chat-input");
+    const chatArea = document.getElementById("chat-area");
+
+    sendBtn.addEventListener("click", function () {
+      const message = input.value.trim();
+      if (message !== "") {
+        const userBubble = document.createElement("div");
+        userBubble.className = "user-message user-message";
+        userBubble.innerHTML = `
+          <p>${message}</p>
+          <span class="time" id="msg-time">${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+        `;
+        chatArea.appendChild(userBubble);
+
+        const lowerMsg = message.toLowerCase();
+        let botReply = "";
+        if (lowerMsg.includes("order") || lowerMsg.includes("orders")) {
+          botReply = "Would you like to see your order history?";
+        } else if (lowerMsg.includes("return")) {
+          botReply = "Would you like to initiate a return?";
+        } else if (lowerMsg.includes("help")) {
+          botReply = "Type orders or returns to see more information about those items.";
+        } else {
+          botReply = "I don't understand. Please type 'orders' or 'returns' to see more info."
+        }
+
+        setTimeout(() =>{
+          const botBubble = document.createElement("div");
+          botBubble.className = "recieved-chats recieved-msg recieved-msg-inbox";
+          botBubble.innerHTML = `<p>${botReply}</p>
+          <span class="time" id="msg-time">${new Date().toLocaleTimeString([], { hour: '2-digit', minute:"2-digit"})}</span>`;
+          chatArea.appendChild(botBubble);
+          chatArea.scrollTop = chatArea.scrollHeight;
+        }, 600);
+        input.value = "";
+        chatArea.scrollTop = chatArea.scrollHeight;
+      }
+    });
+  });
+</script>
+
+<!-- <section> !!! OLD CHATBOT SYSTEM, TRYING ANOTHER ONE FIRST !!!
     <div class="container py-5">
   
       <div class="row d-flex justify-content-center">
@@ -57,5 +144,5 @@
       </div>
   
     </div>
-  </section>
+  </section> -->
   {% endblock %}
