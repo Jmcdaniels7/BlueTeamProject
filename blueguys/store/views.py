@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import timezone
 from django.contrib.auth.models import User, auth
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required  
 from .models import Item
 
 
@@ -15,7 +16,6 @@ def homepage(request):
 
 def chatbot(request):
     return render(request, 'store/chatbot.html',{})
-   
 
 # Login view
 def login(request):
@@ -31,7 +31,6 @@ def login(request):
         else:
             messages.info(request, 'Invalid login, username or password is not registered')
             return redirect('login')
-
     else:
         return render(request, 'store/login.html')
 
@@ -51,14 +50,13 @@ def register(request):
         confirmpassword = request.POST['confirmpassword']
 
         if password == confirmpassword:
-            if User.objects.filter(email=email).exists(): # checks for existing email
+            if User.objects.filter(email=email).exists():
                 messages.info(request, 'Email is already in use.')
-                return redirect('register')  #redirects the page back to register.html with message
+                return redirect('register')
             elif User.objects.filter(username=username).exists():
                 messages.info(request, 'Username is already in use.')
                 return redirect('register')
             else:
-                #This saves a user in the database
                 user = User.objects.create_user(
                     first_name=firstname, last_name=lastname, email=email, password=password, username=username
                 )
@@ -70,7 +68,6 @@ def register(request):
             return redirect('register')
     else:
         return render(request, 'store/register.html')
-    return render(request, 'store/register.html')
 
 # Store page with optional search
 def store_page(request):
@@ -84,3 +81,15 @@ def store_page(request):
 def item_detail(request, id):
     item = get_object_or_404(Item, pk=id)
     return render(request, 'store/item_detail.html', {'item': item})
+
+# Account Info Page 
+@login_required
+def account_info(request):
+    user = request.user
+    context = {
+        'first_name': user.first_name,
+        'last_name': user.last_name,
+        'username': user.username,
+        'password': '********',  
+    }
+    return render(request, 'store/account_info.html', context)
