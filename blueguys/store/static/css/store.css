@@ -103,6 +103,30 @@ body {
     color: white;
 }
 
+.product-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 2px solid #dcdcdc; /* silver border */
+    border-radius: 16px;
+}
+.product-card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 24px rgba(162, 155, 254, 0.2); /* lilac shadow */
+}
+
+.back-btn {
+    background-color: #ff9ff3; /* bright pink */
+    border: none;
+    color: white;
+    font-weight: 500;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+.back-btn:hover {
+    background-color: #f368e0; /* bright blue hover */
+    transform: scale(1.05);
+    color: #fff;
+}
+
 .registration-container,
 .login-container {
     background-color: #ffeaa7; /* pastel yellow */

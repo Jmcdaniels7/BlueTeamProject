@@ -91,8 +91,17 @@
                           </div>
                       </a> 
                     </li>
-                    <li class="nav-item">
-                      <a class="nav-link btn btn-danger" href="/store/logout">Logout</a>
+                    <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle btn btn-danger" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Account
+                      </a>
+                      <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                        <li><a class="dropdown-item" href="/store/account_info">Profile</a></li>
+                        <li><a class="dropdown-item" href="/store/orders">Orders</a></li>
+                        <li><a class="dropdown-item" href="/store/orderhistory">Order History</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item text-danger" href="/store/logout">Logout</a></li>
+                      </ul>
                     </li>
                   {% else %}
                     <li class="nav-item">

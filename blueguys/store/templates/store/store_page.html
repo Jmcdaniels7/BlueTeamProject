@@ -2,6 +2,117 @@
 {% load static %}
 
 {% block content %}
+
+<style>
+    /* General Container Styling */
+    .container {
+        max-width: 1200px;
+    }
+
+    /* Sidebar Styling */
+    .sidebar {
+        background-color: #f9f9f9; /* Light grey background for the sidebar */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    .sidebar h3 {
+        color: #a29bfe;
+        font-weight: bold;
+    }
+    
+    .sidebar a {
+        color: #333;
+        font-size: 1.1rem;
+        font-weight: 500;
+        text-decoration: none;
+        padding: 8px 12px;
+        display: block;
+        border-radius: 4px;
+        transition: all 0.3s ease;
+    }
+    
+    .sidebar a:hover {
+        background-color: #a29bfe;
+        color: white;
+    }
+
+    /* Styling for Store Area */
+    .store-area h1 {
+        color: #a29bfe;
+        font-weight: bold;
+    }
+
+    /* Card Styling */
+    .card {
+        border: none;
+        border-radius: 10px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    }
+    
+    .card img {
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+    }
+
+    .card-body {
+        padding: 20px;
+        background-color: #fff;
+    }
+
+    .card-title {
+        font-size: 1.2rem;
+        color: #333;
+        font-weight: bold;
+    }
+    
+    .card-text {
+        font-size: 1rem;
+        color: #666;
+        margin-bottom: 15px;
+    }
+
+    .btn-primary {
+        background-color: #ff9ff3;
+        border-color: #ff9ff3;
+    }
+
+    .btn-primary:hover {
+        background-color: #f368e0;
+        border-color: #f368e0;
+    }
+
+    /* Layout Adjustments */
+    .store-area .row {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .col-md-4 {
+        padding: 10px;
+    }
+
+    /* Responsive tweaks */
+    @media (max-width: 767px) {
+        .sidebar {
+            margin-bottom: 20px;
+        }
+
+        .store-area {
+            padding-left: 0;
+            padding-right: 0;
+        }
+
+        .col-md-4 {
+            flex: 1 0 100%; /* Makes items stack on smaller screens */
+        }
+    }
+</style>
+
 <div class="container my-5 content-wrapper">
     <div class="row">
         <!-- Sidebar with categories -->
@@ -56,4 +167,8 @@
         </div>
     </div>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+
 {% endblock %}
