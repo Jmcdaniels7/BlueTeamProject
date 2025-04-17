@@ -104,34 +104,31 @@
 
             const reply = `Looks like your order (order number: ${user.order}) for ${user.description} at a total of ${user.price}.`;
             botMessage(reply);
-        } else {
+          } else {
             botMessage("Couldn't load user data.");
-        }
-    } else if (lowerMsg.includes("no")) {
+            }
+        } else if (lowerMsg.includes("no")) {
         botMessage("Okay, taking you back to the menu!");
-    } else {
-        botMessage("Sorry, I didn't understand. Could you enter 'Yes' or 'No'?");
-    }
-    waitingForOrderConfirmation = false; // Reset the flag
-} else {
-       
+        } else {
+          botMessage("Sorry, I didn't understand. Could you enter 'Yes' or 'No'?");
+        }
+        waitingForOrderConfirmation = false;
+      } else {
         if (lowerMsg.includes("order") || lowerMsg.includes("orders")) {
           botMessage("Would you like to see your order history?");
           waitingForOrderConfirmation = true;
+        //  if (user)
         } else if (lowerMsg.includes("return")) {
           botMessage("Would you like to initiate a return?");
         } else if (lowerMsg.includes("help")) {
           botMessage("Type orders or returns to see more information about those items.");
         } else {
           botMessage("I don't understand. Please type 'orders' or 'returns' to see more info.");
-        }
+        }             
       }
-
-
       input.value = "";
       chatArea.scrollTop = chatArea.scrollHeight;
     }
-
     sendBtn.addEventListener("click", handleUserMsg);
     input.addEventListener("keydown", function (event){
       if (event.key === "Enter") {
