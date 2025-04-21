@@ -4,6 +4,7 @@ from django.utils import timezone
 
 # Create your models here.
 class Item(models.Model):
+    item_id = models.IntegerField(primary_key=True)
     title = models.CharField(max_length=200)
     description = models.TextField()
     price = models.FloatField()
