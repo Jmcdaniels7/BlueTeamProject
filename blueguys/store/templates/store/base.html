@@ -4,6 +4,8 @@
 <html>
 <head>
     <title>Store</title>
+    <meta charset="UTF-8">
+    <meta name ="viewport" content="width=device-width,initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext">
     <link rel="stylesheet" href="{% static 'css/store.css' %}">
@@ -17,100 +19,6 @@
           margin: 5px; /* Add spacing between buttons */
 
       }
-
-      .cart-tab
-      {
-          width: 400px;
-          height: 400px;
-          /*this background color could be anything, just set to black for now*/
-          background-color: #353432;
-          color: #eee;
-          position: fixed;
-          inset: 0 0 0 auto;
-          display: grid;
-          grid-template-rows: 70px 1fr 70px;
-      }
-
-      .cart-tab h2
-      {
-          padding: 2px;
-          margin: 0;
-          font-weight: 300;
-
-      }
-
-      .cart-tab .btn
-      {
-          display: grid;
-          grid-template-columns: repeat(2, 1fr);
-
-      }
-
-      .cart-tab .btn button
-      {
-          background-color: #ff9ff3;
-          border: none;
-          font-family: 'Roboto', sans-serif;
-          font-weight: 500;
-          cursor: pointer;
-      }
-
-      .cart-tab .btn .close
-      {
-        background-color: #eee;
-      }
-
-      .cart-tab .list-cart .item img
-      {
-        width: 100%;
-      }
-
-      .cart-tab .list-cart .item
-      {
-        display: grid;
-        grid-template-columns: 70px 150px 50px 1fr;
-        gap: 10px;
-        text-align: center;
-        align-items: center;
-      }
-
-      .list-cart .quantity span
-      {
-        display: inline-block;
-        width: 25px;
-        height: 25px;
-        background-color: #eee;
-        color: #555;
-        border-radius: 50%;
-        cursor: pointer;
-      }
-
-      .list-cart .quantity span:nth-child(2)
-      {
-        background-color: transparent;
-        color: #eee;
-      }
-
-      .list-cart .item:nth-child(even)
-      {
-        background-color: #eee1;
-      }
-
-      .list-cart
-      {
-        overflow: auto;
-      }
-
-      .list-cart::-webkit-scrollbar
-      {
-        width: 0;
-      }
-
-
-
-      
-
-      
     </style>
 
 </head>
@@ -134,18 +42,18 @@
                     <li class="nav-item">
                       <a class="nav-link btn btn-danger" href="/store/store_page">Products</a>
                     </li>
-                    <li class="nav-item">
-                      <a class="nav-link btn btn-danger">
-                        <div class="shop-cart">
-                          <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7H7.312"/>
-                            </svg>
-                            <span>0</span>
-                          </div>
-                      </a> 
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link btn btn-danger" href="/store/logout">Logout</a>
+                    
+                    <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle btn btn-danger" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Account
+                      </a>
+                      <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                        <li><a class="dropdown-item" href="/store/account_info">Profile</a></li>
+                        <li><a class="dropdown-item" href="/store/orders">Orders</a></li>
+                        <li><a class="dropdown-item" href="/store/orderhistory">Order History</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item text-danger" href="/store/logout">Logout</a></li>
+                      </ul>
                     </li>
                   {% else %}
                     <li class="nav-item">
@@ -157,38 +65,8 @@
             </div>
         </nav>
 
-
-        <div class="cart-tab">
-          <h2>Shopping Cart</h2>
-
-          <div class="list-cart">
-            <div class="item">
-              <div class="image">
-
-              </div>
-
-              <div class ="name">
-                Name
-              </div>
-
-              <div class="total-price">
-                  200$
-              </div>
-
-              <div class="quantity">
-                <span class="minus"> - </span>
-                <span>1</span>
-                <span class="plus"> + </span>
-              </div>
-
-            </div>
-
-          </div>
-          <div class="btn">
-            <button class="close">Close</button>
-            <button class="checkout">Checkout</button>
-          </div>
-        </div>
+        
+        
   
         
 
