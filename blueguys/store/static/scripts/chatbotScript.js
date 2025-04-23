@@ -4,7 +4,11 @@ window.addEventListener("DOMContentLoaded", function () {
     const chatArea = document.getElementById("chat-area");
 
     let waitingForOrderConfirmation = false;
+    let awaitingReturnOrderId = false;
+    let userData = [];
 
+
+    const timeNow = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit'});
     function botMessage(string){
       setTimeout(() => {
         const botBubble = document.createElement("div");
@@ -23,70 +27,100 @@ window.addEventListener("DOMContentLoaded", function () {
           throw new Error('Unable to connect to DB: ' + response.statusText);
         }
         const data = await response.json();
-        console.log("fetched user data:", data);
-        return data;
+        userData = data.data;
+        return userData;
       } catch (error) {
         console.error('Error fetching user data', error);
-        return null;
+        botMessage("Error loading user data");
+        return [];
       }
     }
 
+    botMessage("Hello, How can I help you?")
+    //This is serving as a test function as well as an intro, it's to confirm Bot reply functions for later and timestamp handling. 
+    //moved from the hard coded message on the HTML page.
     async function handleUserMsg() {
       const message = input.value.trim();
       if (message === "") return;
-
+        //creates the div for reply and slaps it onto the HTML page
       const userBubble = document.createElement("div");
       userBubble.className = "user-message user-message";
       userBubble.innerHTML = `
-        <p>${message}</p>
-        <span class="time" id="msg-time">${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
-      `;
+      <p>${message}</p>
+      <span class="time">${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>`;
       chatArea.appendChild(userBubble);
-
+        //lowercase it to make it easier to parse
       const lowerMsg = message.toLowerCase();
-      
-      if (waitingForOrderConfirmation) {
-        if (lowerMsg.includes("yes")) {
-          const jsonData = await loadUserData();
-          console.log(jsonData);  
-          if (jsonData && jsonData.data && jsonData.data.length) {
-            const users = jsonData.data;
-            const randUser = Math.floor(Math.random() * users.length);
-            console.log("random number selected: " + randUser)
-            const user = users[randUser];
-
-            const reply = `Looks like your order (order number: ${user.order}) for ${user.description} at a total of ${user.price}.`;
-            botMessage(reply);
-          } else {
-            botMessage("Couldn't load user data.");
+        //reply to orders
+        if (waitingForOrderConfirmation) {
+            if (lowerMsg.includes("yes")) {
+              await loadUserData();
+              if (userData.length) {
+                const user = userData[Math.floor(Math.random() * userData.length)];
+                botMessage(`Looks like your order (order number: ${user.order}) was for ${user.description} at a total of $${user.price}.`);
+              }
+              waitingForOrderConfirmation = false;
+              return;
+            } else if (lowerMsg.includes("no")) {
+              botMessage("Okay, returning you to the main menu.");
+              waitingForOrderConfirmation = false;
+              return;
+            } else {
+              botMessage("Please respond with 'Yes' or 'No'.");
+              return;
             }
-        } else if (lowerMsg.includes("no")) {
-        botMessage("Okay, taking you back to the menu!");
-        } else {
-          botMessage("Sorry, I didn't understand. Could you enter 'Yes' or 'No'?");
+          }
+        //Need to validate input to look for just orderID in there instead of the whole message.
+        // so if someone sends in "order 12434" it just looks for the number, and ignores the order part.
+        if (awaitingReturnOrderId) {
+            const matchedOrder = userData.find(user => user.order === message);
+            if (matchedOrder) {
+              let reply = "";
+              switch (matchedOrder.orderStatus.toLowerCase()) {
+                case "delivered":
+                    // !!! ADD PATH ONCE IT GETS PLACED INTO THE SYSTEM !!!
+                  reply = `Got it! Let's start the return process. Click <a href="/static/fakeShippingLabel.png" target="_blank">here</a> to view your shipping label. Once we receive the item back, your account will be refunded.`;
+                  break;
+                case "in transit":
+                  reply = `Your order is currently in transit. Please wait for it to arrive before starting a return.`;
+                  break;
+                case "ordered":
+                  reply = `Your order has not been delivered yet, so it has been cancelled.`;
+                  break;
+                default:
+                  reply = `Unknown error, please contact support.`;
+              }
+              botMessage(reply);
+            } else {
+              botMessage("That order ID wasn't found. Try again.");
+            }
+            awaitingReturnOrderId = false;
+            return;
         }
-        waitingForOrderConfirmation = false;
-      } else {
-        if (lowerMsg.includes("order") || lowerMsg.includes("orders")) {
-          botMessage("Would you like to see your order history?");
-          waitingForOrderConfirmation = true;
-        //  if (user)
+      
+          // Main command options
+        if (lowerMsg.includes("order")) {
+        botMessage("Would you like to see your order history?");
+        waitingForOrderConfirmation = true;
         } else if (lowerMsg.includes("return")) {
-          botMessage("Would you like to initiate a return?");
+        await loadUserData();
+        botMessage("What is the order ID you would like to return?");
+        awaitingReturnOrderId = true;
         } else if (lowerMsg.includes("help")) {
-          botMessage("Type orders or returns to see more information about those items.");
+        botMessage("Type 'orders' or 'returns' to get started.");
         } else {
-          botMessage("I don't understand. Please type 'orders' or 'returns' to see more info.");
+        botMessage("I don't understand. Try 'orders', 'returns', or 'help'.");
         }
-      }
-      input.value = "";
-      chatArea.scrollTop = chatArea.scrollHeight;
-    }
-    sendBtn.addEventListener("click", handleUserMsg);
-    input.addEventListener("keydown", function (event){
-      if (event.key === "Enter") {
-        event.preventDefault();
-        handleUserMsg();
+    
+        input.value = "";
+        chatArea.scrollTop = chatArea.scrollHeight;
+        }
+      
+        sendBtn.addEventListener("click", handleUserMsg);
+        input.addEventListener("keydown", function (event) {
+          if (event.key === "Enter") {
+            event.preventDefault();
+            handleUserMsg();
       }
     });
   });
