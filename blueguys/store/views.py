@@ -4,6 +4,7 @@ from django.contrib.auth.models import User, auth
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required  
 from .models import Item
+from .models import Order, PurchaseItem
 
 
 # this is a view to what page opens when the website is first visited
@@ -93,3 +94,12 @@ def account_info(request):
         'password': '********',  
     }
     return render(request, 'store/account_info.html', context)
+
+@login_required
+def current_orders(request):
+    orders = Order.objects.filter(user=request.user).order_by('-order_date')
+    return render(request, 'store/order.html', {'orders': orders})
+
+@login_required
+def order_history(request):
+    return render(request, 'store/order_history.html')
