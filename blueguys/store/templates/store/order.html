@@ -1,0 +1,23 @@
+{% extends 'store/base.html' %}
+{% block content %}
+  <h2>Your Current Orders</h2>
+
+  {% if orders %}
+    <ul>
+      {% for order in orders %}
+        <li>
+          <strong>Order #{{ order.id }}</strong> — {{ order.order_date }}<br>
+          <ul>
+            {% for item in order.items.all %}
+              <li>{{ item.quantity }} × {{ item.item.title }}</li>
+            {% endfor %}
+          </ul>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>You have no current orders.</p>
+  {% endif %}
+
+  <a href="{% url 'order_history' %}">Go to Order History</a>
+{% endblock %}

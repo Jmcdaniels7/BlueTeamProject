@@ -164,17 +164,18 @@
                         <div class="card h-100 position-relative"> <!-- Required for stretched-link -->
                             
                             {% if item.image %}
-                                <img src="{{ item.image.url }}" class="card-img-top" alt="{{ item.title }}">
+                                <img src="{{ item.image.url }}" class="card-img-top" alt="">
                             {% else %}
-                                <img src="{% static 'images/default_image_path.jpg' %}" class="card-img-top" alt="{{ item.title }}">
+                                <img src="{% static 'images/default_image_path.jpg' %}" class="card-img-top" alt="">
                             {% endif %}
                             <div class="card-body d-flex flex-column">
                                 <h5 class="card-title">{{ item.title }}</h5>
                                 <p class="card-text">{{ item.description }}</p>
+                                <p class="card-text">SKU: {{ item.id }}</p>
                                 <p><strong>${{ item.price|floatformat:2 }}</strong></p>
-                                <button class="btn btn-primary mt-auto">Add to Cart</button>
+                                <button class="btn btn-primary mt-auto" value="{{ item.id }}" id="add-cart">Add to Cart</button>
     
-                                Make the whole card clickable 
+                                <!--Make the whole card clickable--> 
                                 <a href="{% url 'item_detail' item.id %}" class="stretched-link"></a>
                             </div>
                         </div>
@@ -226,9 +227,9 @@
     let iconCart = document.querySelector('.icon-cart');
     let closeCart = document.querySelector('.close');
     let body = document.querySelector('body');
-    let listProduct = document.querySelector('.list-cart');
+    let listProductHTML = document.querySelector('.listProduct')
 
-    let listProducts = [];
+    let istProducts = [];
 
     iconCart.addEventListener('click', () => 
     {
@@ -239,6 +240,17 @@
     {
         body.classList.toggle('show-cart')
     })
+
+    const initApp = () => {
+        // getting data from json file
+        fetch('itemData.json')
+        .then(response => response.json())
+        .then(data => {
+            listProducts = data;
+            console.log(listProducts);
+            addDataToHTML();
+        })
+    }
 
 
 </script>
