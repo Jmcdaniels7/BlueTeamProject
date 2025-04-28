@@ -1,7 +1,5 @@
 {% extends 'store/base.html' %}
 
-{% load static %}
-
 {% block content %}
 
 <div class="msg-container">
@@ -19,13 +17,26 @@
             <div class="recieved-chats-img">
               <img src="ai_img.png">
             </div>
+            <div class="recieved-msg">
+              <div class="recieved-msg-inbox">
+                <p>
+                  Hello! How can I help you?
+                </p>
+                <span class="time" id="msg-time"></span>
+                <script>
+                  const timeNow = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                  //should print the time the message is sent, shouldn't*** update over time.
+                  document.getElementById("msg-time").textContent = "sent at: " + timeNow;
+                </script>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
     <div class="msg-bottom">
       <div class="input-group">
-        <input type="text" class="form-control" id= "chat-input" placeholder="Type your question!">
+        <input type="text" class="form-control" id= "chat-input" placeholder="Type your question!" />
         <button class="send-btn" id="send-btn" aria-label="Send">
           <i class="bi bi-send"></i>
         </button>
@@ -33,5 +44,105 @@
     </div>
   </div>
 </div>
-<script src="{% static 'scripts/chatbotScript.js' %}" defer></script>
+<script>
+  window.addEventListener("DOMContentLoaded", function () {
+    const sendBtn = document.getElementById("send-btn");
+    const input = document.getElementById("chat-input");
+    const chatArea = document.getElementById("chat-area");
+
+    sendBtn.addEventListener("click", function () {
+      const message = input.value.trim();
+      if (message !== "") {
+        const userBubble = document.createElement("div");
+        userBubble.className = "user-message user-message";
+        userBubble.innerHTML = `
+          <p>${message}</p>
+          <span class="time" id="msg-time">${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+        `;
+        chatArea.appendChild(userBubble);
+
+        const lowerMsg = message.toLowerCase();
+        let botReply = "";
+        if (lowerMsg.includes("order") || lowerMsg.includes("orders")) {
+          botReply = "Would you like to see your order history?";
+        } else if (lowerMsg.includes("return")) {
+          botReply = "Would you like to initiate a return?";
+        } else if (lowerMsg.includes("help")) {
+          botReply = "Type orders or returns to see more information about those items.";
+        } else {
+          botReply = "I don't understand. Please type 'orders' or 'returns' to see more info."
+        }
+
+        setTimeout(() =>{
+          const botBubble = document.createElement("div");
+          botBubble.className = "recieved-chats recieved-msg recieved-msg-inbox";
+          botBubble.innerHTML = `<p>${botReply}</p>
+          <span class="time" id="msg-time">${new Date().toLocaleTimeString([], { hour: '2-digit', minute:"2-digit"})}</span>`;
+          chatArea.appendChild(botBubble);
+          chatArea.scrollTop = chatArea.scrollHeight;
+        }, 600);
+        input.value = "";
+        chatArea.scrollTop = chatArea.scrollHeight;
+      }
+    });
+  });
+</script>
+
+<!-- <section> !!! OLD CHATBOT SYSTEM, TRYING ANOTHER ONE FIRST !!!
+    <div class="container py-5">
+  
+      <div class="row d-flex justify-content-center">
+        <div class="col-md-8 col-lg-6 col-xl-4">
+  
+          <div class="card" id="chat1" style="border-radius: 15px;">
+            <div
+              class="card-header d-flex justify-content-between align-items-center p-3 bg-info text-white border-bottom-0"
+              style="border-top-left-radius: 15px; border-top-right-radius: 15px;">
+              <i class="fas fa-angle-left"></i>
+              <p class="mb-0 fw-bold">Live chat</p>
+              <i class="fas fa-times"></i>
+            </div>
+            <div class="card-body">
+  
+              <div class="d-flex flex-row justify-content-start mb-4">
+                <div class="p-3 ms-3" style="border-radius: 15px; background-color: rgba(57, 192, 237,.2);">
+                  <p class="small mb-0">test</p>
+                </div>
+              </div>
+  
+              <div class="d-flex flex-row justify-content-end mb-4">
+                <div class="p-3 me-3 border bg-body-tertiary" style="border-radius: 15px;">
+                  <p class="small mb-0">test 2</p>
+                </div>
+              </div>
+  
+              <div class="d-flex flex-row justify-content-start mb-4">
+                <div class="ms-3" style="border-radius: 15px;">
+                  <div class="bg-image">
+                    <a href="#!">
+                      <div class="mask"></div>
+                    </a>
+                  </div>
+                </div>
+              </div>
+  
+              <div class="d-flex flex-row justify-content-start mb-4">
+                <div class="p-3 ms-3" style="border-radius: 15px; background-color: rgba(57, 192, 237,.2);">
+                  <p class="small mb-0">Test 3</p>
+                </div>
+              </div>
+  
+              <div data-mdb-input-init class="form-outline">
+                <textarea class="form-control bg-body-tertiary" id="textAreaExample" rows="4"></textarea>
+                <label class="form-label" for="textAreaExample">Test 4</label>
+              </div>
+  
+            </div>
+          </div>
+  
+        </div>
+      </div>
+  
+    </div>
+  </section> -->
   {% endblock %}

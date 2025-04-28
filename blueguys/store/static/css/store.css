@@ -1,17 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Chewy&display=swap');
+
 body {
-    font-family: 'Roboto', sans-serif;
-    background-color: #ffffff; /* white background */
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+    font-family: 'Chewy', cursive;
+    background: linear-gradient(120deg, #ffd1dc, #e0bbff, #caffbf, #f1c0e8, #b5ead7, #ff9ff3);
+    background-size: 600% 600%;
+    animation: gradientShift 15s ease infinite;
     margin: 0;
     line-height: 1.6;
+    color: #1f1f1f;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Apply Chewy to key elements */
+.header-title,
+.top-menu a,
+.btn-primary,
+.btn-secondary,
+.carousel-caption h5,
+.carousel-caption p {
+    font-family: 'Chewy', cursive;
+}
+
+/* Pastel background for carousel text */
+.carousel-caption {
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(255, 159, 243, 0.4);
+    color: #222;
 }
 
 .wrapper {
     max-width: 600px;
     margin: 0 auto;
-    background-color: #ffeaa7; /* pastel yellow */
+    background: rgba(255, 255, 255, 0.85) url('/static/images/spiral-bg.png') no-repeat center;
+    background-size: contain;
     padding: 20px 40px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
@@ -25,22 +53,20 @@ body {
 }
 
 .header-title {
-    display: inline-block;
-    padding: 10px 20px;
-    position: relative;
-    left: -113px;
-    top: -25px;
-    background-color: #ffd1dc; /* light pink */
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    position: static;
+    background-color: #ffd1dc;
     border-radius: 5px;
     color: #000;
-    font-family: 'Roboto', sans-serif;
     font-size: 22pt;
     font-weight: bold;
     text-decoration: none;
 }
 
 .header-title:hover {
-    background-color: #ff9ff3; /* bright pink hover */
+    background-color: #ff9ff3;
     color: white;
 }
 
@@ -48,12 +74,15 @@ body {
     display: flex;
     justify-content: flex-end;
     margin-bottom: 20px;
-    background-color: #e0bbff; /* light purple */
+    background-color: #e0bbff;
     padding: 10px;
     box-shadow: 0 4px 8px #dcdcdc;
 }
 
 .top-menu a {
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(4px);
+    border: 1px solid #ff9ff3;
     color: #000;
     font-size: 18pt;
     margin-right: 20px;
@@ -61,75 +90,57 @@ body {
     border-radius: 4px;
     padding: 10px 20px;
     transition: background-color 0.3s ease;
-    background-color: #caffbf; /* pastel green */
+    background-color: #caffbf;
+    box-shadow: 0 0 5px rgba(255, 159, 243, 0.6);
 }
 
 .top-menu a:hover {
-    background-color: #f368e0; /* bright blue */
+    background-color: #f368e0;
     color: white;
 }
 
 .post {
-    margin-bottom: 70px;
-    background-color: #d5f3fe; /* light blue */
-    border-radius: 8px;
-    box-shadow: 0 2px 10px #dcdcdc;
+    background-color: rgba(255, 255, 255, 0.65);
+    border: 2px dashed #ff9ff3;
+    box-shadow: 0 0 12px rgba(255, 153, 243, 0.5), 0 0 30px rgba(200, 255, 255, 0.3);
     padding: 20px;
+    border-radius: 8px;
+}
+
+.btn-primary,
+.btn-secondary {
+    box-shadow: 0 0 8px rgba(255, 159, 243, 0.8);
 }
 
 .btn-secondary,
 .btn-secondary:visited {
     color: white;
-    background-color: #a29bfe; /* lilac */
+    background-color: #a29bfe;
     border: 1px solid #a29bfe;
     border-radius: 5px;
     transition: background-color 0.3s ease;
 }
 
 .btn-secondary:hover {
-    background-color: #f368e0; /* bright blue hover */
+    background-color: #f368e0;
 }
 
 .btn-primary {
-    background-color: #ff9ff3; /* bright pink */
+    background-color: #ff9ff3;
     border-color: #ff9ff3;
     color: white;
     transition: background-color 0.3s ease;
 }
 
 .btn-primary:hover {
-    background-color: #f368e0; /* bright blue hover */
+    background-color: #f368e0;
     border-color: #f368e0;
     color: white;
 }
 
-.product-card {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border: 2px solid #dcdcdc; /* silver border */
-    border-radius: 16px;
-}
-.product-card:hover {
-    transform: scale(1.02);
-    box-shadow: 0 8px 24px rgba(162, 155, 254, 0.2); /* lilac shadow */
-}
-
-.back-btn {
-    background-color: #ff9ff3; /* bright pink */
-    border: none;
-    color: white;
-    font-weight: 500;
-    transition: background-color 0.2s ease, transform 0.2s ease;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-}
-.back-btn:hover {
-    background-color: #f368e0; /* bright blue hover */
-    transform: scale(1.05);
-    color: #fff;
-}
-
 .registration-container,
 .login-container {
-    background-color: #ffeaa7; /* pastel yellow */
+    background-color: #ffeaa7;
     border-radius: 7px;
     padding: 20px;
     max-width: 400px;
@@ -138,7 +149,6 @@ body {
     box-shadow: 0 0 15px #dcdcdc;
     text-align: center;
 }
-
 
 .form-group {
     margin-bottom: 20px;
@@ -165,7 +175,7 @@ body {
 }
 
 .form-group input[type="submit"] {
-    background-color: #a29bfe; /* lilac */
+    background-color: #a29bfe;
     color: white;
     cursor: pointer;
     font-size: 16px;
@@ -175,171 +185,86 @@ body {
 }
 
 .form-group input[type="submit"]:hover {
-    background-color: #f368e0; /* bright hover */
-}
-/* 4 arguments for CSS: TOP RIGHT BOTTOM LEFT */
-.msg-container {
-    width: 50%;
-    margin: auto;
-    margin-top: 50px;
-    height: 70%;
-    
+    background-color: #f368e0;
 }
 
-.msg-header{
-    display: flex;
-    align-items: center;
-    background-color: #efefef;
-    border: 2px solid #1f1f1f;
-    border-bottom: none;
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
-    padding: 10px;
-}
-.msg-profile {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+/* ---------------- CART TAB ---------------- */
+.cart-tab {
+    width: 280px;
+    height: 300px;
+    background-color: #353432;
+    color: #eee;
+    position: fixed;
+    top: 0;
+    right: 0;
+    display: grid;
+    grid-template-rows: 70px 1fr 70px;
+    z-index: 999;
 }
 
-.msgimg {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-}
-
-.username {
-    font-weight: bold;
-    color: #0f0f0f;
+.cart-tab h2 {
+    padding: 2px;
     margin: 0;
+    font-weight: 300;
 }
 
-.chat-page {
-    padding: 0 0 50px 0;
+.cart-tab .btn {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
 }
-.msg-inbox {
-    border: 2px solid #000;
-    overflow: hidden;
-    border-top: 1px solid #000;
-    border-bottom: none;
-}
-.chats {
-    padding: 30px 15px 0 25px;
-}
-.msg-page{
-    display: flex;
-    flex-direction: column;
-    max-height: 500px;
-    overflow-y: auto;
-}
-.msg-bottom {
-    border-top: 1px solid #000;
-    background-color: #ffffff;
-    /* padding: 10px 20px; */
-    border: 2px solid #000;
-    border-bottom-right-radius: 20px;
-    border-bottom-left-radius: 20px;
 
-}
-.input-group{
-    display: flex;
-    align-items: center;
-    width: 100%;
-    max-width: 700px;
-    margin: 0 auto;
-    background-color: #fff;
-    border-radius: 20px;
-    overflow: hidden;
-}
-.form-control {
-    flex: 1;
+.cart-tab .btn button {
+    background-color: #ff9ff3;
     border: none;
-    padding: 10px 15px;
-    font-size: 1rem;
-    border-radius: 0;
-    background-color: #fff;
-    color: #ffffff;
-}
-.send-btn {
-    background: transparent;
-    border: none;
-    padding: 0 15px;
-    font-size: 1.5rem;
-    color: #495057;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
     cursor: pointer;
-    display: flex;
-    align-items: center;
-    transition: color 0.2s ease-in-out;
 }
-.send-btn:hover {
-    color: #000
+
+.cart-tab .btn .close {
+    background-color: #eee;
 }
-input:focus,
-button:focus {
-    outline: none;
-    box-shadow: none;
-}
-.recieved-chats-img{
-    display: flex;
-    float: left;
-    width: 50px;
-}
-.recieved-msg{
-    display: flex;
-    padding: 0 0 0 10px;
-    width: 92%;
-}
-.recieved-msg-inbox{
-    width: 80%;
-}
-.recieved-msg-inbox p {
-    background: #efefef none repeat scroll 0 0;
-    border-radius: 10px;
-    color: #646464;
-    font-size: 1rem;
-    padding: 1rem;
+
+.cart-tab .list-cart .item img {
     width: 100%;
-    box-shadow: #00000025 0px 5px 5px 2px;
 }
-    p {
-    overflow-wrap: break-word;
+
+.cart-tab .list-cart .item {
+    display: grid;
+    grid-template-columns: 70px 150px 50px 1fr;
+    gap: 10px;
+    text-align: center;
+    align-items: center;
 }
-.time {
-    color: #777;
-    display: flex;
-    font-size: .6rem;
-    margin-left: 1rem;
-    padding-right: 25%;
+
+.list-cart .quantity span {
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    background-color: #eee;
+    color: #555;
+    border-radius: 50%;
+    cursor: pointer;
 }
-.recieved-chats {
-    padding-bottom: 10px;
+
+.list-cart .quantity span:nth-child(2) {
+    background-color: transparent;
+    color: #eee;
 }
-.user-message {
-    background-color: #dcf8c6;
-    padding: 10px 15px;
-    border-radius: 20px;
-    margin: 10px 0;
-    max-width: 70%;
-    align-self: flex-end;
-    min-width: 300px;
-    position: relative;
-  }
-  
-.chat-message .time {
-    color: #777;
-    display: flex;
-    font-size: .6rem;
-    margin-left: 1rem;
-    padding-right: 25%;
-  }
-  .bot-message {
-    align-self: flex-start;
-    background-color: #fff;
-  }
-/*    
-    border-bottom-right-radius: 20px;
-    border-bottom-left-radius: 20px;
-*/
+
+.list-cart .item:nth-child(even) {
+    background-color: #eee1;
+}
+
+.list-cart {
+    overflow: auto;
+}
+
+.list-cart::-webkit-scrollbar {
+    width: 0;
+}
+
+/* ---------------- Responsive ---------------- */
 @media (max-width: 600px) {
     .wrapper {
         padding: 10px 20px;
@@ -366,136 +291,3 @@ button:focus {
         padding: 10px;
     }
 }
-
-/*shopping cart*/
-
-.container header
-{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 20px 0;
-}
-
-header .icon-cart
-{
-    position: relative;
-}
-
-header .icon-cart span
-{
-    display: flex;
-    width: 30px;
-    height: 30px;
-    background-color: #f368e0;
-    justify-content: center;
-    align-items: center;
-    color: #fff;
-    border-radius: 50%;
-    position: absolute;
-    top: 50%;
-    right: -20px;
-}
-
-
-.cart-tab
-{
-    width: 400px;
-    /*this background color could be anything, just set to black for now*/
-    background-color: #353432;
-    color: #eee;
-    position: fixed;
-    inset: 0 -800px 0 auto;
-    display: grid;
-    grid-template-rows: 70px 1fr 70px;
-    transition: .5s;
-}
-
-.show-cart .cart-tab
-{
-    inset: 0 -325px 0 auto;
-}
-
-.show-cart .container
-{
-    transform: translateX(-100px);
-    
-    
-}
-
-.cart-tab h2
-{
-    padding: 20px;
-    margin: 0;
-    font-weight: 300;
-
-}
-
-.cart-tab .cart-btn
-{
-    height: 50px;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-}
-
-.cart-tab .cart-btn button
-{
-    background-color: #ff9ff3;
-    border: none;
-    font-family: 'Roboto', sans-serif;
-    font-weight: 500;
-    cursor: pointer;
-}
-
-.cart-tab .cart-btn .close
-{
-    background-color: #eee;
-}
-
-.cart-tab .list-cart .item img
-{
-    width: 100%;
-}
-
-.cart-tab .list-cart .items
-{
-    display: grid;
-    grid-template-columns: 70px 150px 50px 1fr;
-    gap: 10px;
-    text-align: center;
-    align-items: center;
-}
-
-.list-cart .item-quantity span
-{
-    display: inline-block;
-    width: 25px;
-    height: 25px;
-    background-color: #eee;
-    color: #555;
-    border-radius: 50%;
-    cursor: pointer;
-}
-
-.list-cart .item-quantity span:nth-child(2)
-{
-    background-color: transparent;
-    color: #eee;
-
-}
-
-.list-cart .items:nth-child(even)
-{
-    background-color: #ff9ff3;
-}
-
-.list-cart
-{
-    overflow: auto;
-}
-
-.list-cart::-webkit-scrollbar
-{
-    width: 0;
-}
-
