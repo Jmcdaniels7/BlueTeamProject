@@ -7,7 +7,6 @@ window.addEventListener("DOMContentLoaded", function () {
     let awaitingReturnOrderId = false;
     let userData = [];
 
-
     const timeNow = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit'});
     function botMessage(string){
       setTimeout(() => {
@@ -70,7 +69,7 @@ window.addEventListener("DOMContentLoaded", function () {
               return;
             }
           }
-        //Need to validate input to look for just orderID in there instead of the whole message.
+        // Need to validate input to look for just orderID in there instead of the whole message.
         // so if someone sends in "order 12434" it just looks for the number, and ignores the order part.
         if (awaitingReturnOrderId) {
             const matchedOrder = userData.find(user => user.order === message);
@@ -111,7 +110,7 @@ window.addEventListener("DOMContentLoaded", function () {
         } else {
         botMessage("I don't understand. Try 'orders', 'returns', or 'help'.");
         }
-    
+        
         input.value = "";
         chatArea.scrollTop = chatArea.scrollHeight;
         }
