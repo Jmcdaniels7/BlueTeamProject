@@ -14,5 +14,5 @@ urlpatterns = [
     path('store/item_detail/<int:id>/', views.item_detail, name='item_detail'),  # for item detail page
     path('store/account_info/', views.account_info, name='account_info'),
     path('store/orders/', views.current_orders, name='current_orders'),
-    path('store/orders/history/', views.order_history, name='order_history'),  
+    path('store/order_history/', views.order_history, name='order_history'),  
 ]
