@@ -195,6 +195,7 @@ body {
 header .icon-cart
 {
     position: relative;
+    cursor: pointer;
 }
 
 header .icon-cart span

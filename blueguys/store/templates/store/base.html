@@ -20,8 +20,18 @@
           
           
       }
+
+      .wrapperB {
+          max-width: 1600px;
+          background-color: rgba(0, 0, 0, 0.5); 
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+          border-radius: 10px;
+      }
       
-      
+      .nav-item {
+        background-color: transparent;
+      }
+
       .nav-link {
           margin: 5px; /* Add spacing between buttons */
           font-family: 'Chewy', cursive;
@@ -29,19 +39,21 @@
           background-color: rgba(60, 60, 60, 0.4); 
           transition: background-color 0.3s ease;
       }
-      .wrapper {
-          max-width: 600px;
-          margin: 0 auto;
-          background-color: rgba(0, 0, 0, 0.5); 
-          padding: 20px 40px;
-          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-          border-radius: 10px;
-      }
+      
       .navbar-brand {
-        font-family: 'Chewy', cursive;
+          font-family: 'Chewy', cursive;
           color: #fff;
           background-color: rgba(60, 60, 60, 0.4); /*home changes */
           transition: background-color 0.3s ease;
+          width: 90px;
+          
+          text-align: center;
+      }
+
+      .navbar-brand:hover {
+        background-color: #cdb4db; /* soft lavender */
+        color: #ff69b4;
+
       }
       .nav-link:hover {
           background-color: #cdb4db; /* soft lavender */
@@ -102,10 +114,10 @@
         <div class="container">
             <a href="/" class="header-title">Twisted Tooth Fairy Shop</a>
         </div>
-        <div class="wrapper mt-0">
+        <div class="wrapperB mt-0">
           <nav class="navbar navbar-expand-lg">
               <div class="container-fluid">
-                <a class="navbar-brand" href="/store/home">Home</a>
+                <a class="navbar-brand btn" href="/store/home">Home</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                   <span class="navbar-toggler-icon"></span>
                 </button>
@@ -113,7 +125,7 @@
                   <ul class="navbar-nav ms-auto">
                     {% if user.is_authenticated %}
                       <li class="nav-item">
-                        <span class="nav-link">Hello, {{user.first_name}}</span>
+                        <!-- example of how to use jinga syntax to render model attributes <span class="nav-link">Hello, {{user.first_name}}</span>-->
                       </li>
                       <li class="nav-item">
                         <a class="nav-link btn btn-danger" href="/store/store_page">Products</a>
