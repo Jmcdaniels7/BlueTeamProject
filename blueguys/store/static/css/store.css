@@ -16,41 +16,15 @@ body {
     100% { background-position: 0% 50%; }
 }
 
-.wrapper {
-    max-width: 600px;
-    margin: 0 auto;
-    background-color: #ffeaa7; /* pastel yellow */
-    padding: 20px 40px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-}
-
 .page-header {
-    background-color: transparent;
+
     margin-bottom: 20px;
-    box-shadow: 0 4px 8px #dcdcdc;
+    box-shadow: 0 4px 8px #000000;
     padding: 10px;
 }
 
-.header-title {
-    display: inline-block;
-    padding: 10px 20px;
-    position: relative;
-    left: -113px;
-    top: -25px;
-    background-color: #ffd1dc; /* light pink */
-    border-radius: 5px;
-    color: #000;
-    font-family: 'Roboto', sans-serif;
-    font-size: 22pt;
-    font-weight: bold;
-    text-decoration: none;
-}
 
-.header-title:hover {
-    background-color: #ff9ff3; /* bright pink hover */
-    color: white;
-}
+
 
 .top-menu {
     display: flex;

@@ -17,12 +17,84 @@
     <style>
       .navbar-nav {
           margin-left: auto;
+          
+          
       }
+      
+      
       .nav-link {
           margin: 5px; /* Add spacing between buttons */
+          font-family: 'Chewy', cursive;
+          color: #fff;
+          background-color: rgba(60, 60, 60, 0.4); 
+          transition: background-color 0.3s ease;
+      }
+      .wrapper {
+          max-width: 600px;
+          margin: 0 auto;
+          background-color: rgba(0, 0, 0, 0.5); 
+          padding: 20px 40px;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+          border-radius: 10px;
+      }
+      .navbar-brand {
+        font-family: 'Chewy', cursive;
+          color: #fff;
+          background-color: rgba(60, 60, 60, 0.4); /*home changes */
+          transition: background-color 0.3s ease;
+      }
+      .nav-link:hover {
+          background-color: #cdb4db; /* soft lavender */
+          color: #ff69b4;
+          
+      }
+      .header-title
+      {
+        display: inline-block;
+        padding: 10px 20px;
+        position: relative;
+        left: -113px;
+        top: -25px;
+        background-color: #95ecec; /* light pink */
+        border-radius: 5px;
+        color: #000;
+        font-family: 'Chewy', cursive;
+        font-size: 22pt;
+        font-weight: bold;
+        text-decoration: none;
+      }
 
+      .header-title:hover {
+          background-color: #ff9ff3; /* bright pink hover */
+          color: white;
+      }
+      .page-header {
+        background-color: transparent;
+          margin-bottom: 20px;
+          box-shadow: 0 4px 8px #dcdcdc;
+          padding: 10px;
+      } 
+
+
+      .header-title:hover::after {
+          content: " ✨";
+          animation: sparkle 0.6s ease infinite;
+      }
+
+      @keyframes sparkle {
+          0%, 100% { opacity: 0; transform: scale(1); }
+          50% { opacity: 1; transform: scale(1.2); }
+      }
+
+
+
+
+      .header-title:hover {
+          background-color: #ff9ff3; /* bright pink hover */
+          color: white;
       }
     </style>
+    
 
 </head>
 <body>
@@ -30,48 +102,45 @@
         <div class="container">
             <a href="/" class="header-title">Twisted Tooth Fairy Shop</a>
         </div>
-        <nav class="navbar navbar-expand-lg bg-body-tertiary">
-            <div class="container-fluid">
-              <a class="navbar-brand" href="/store/home">Home</a>
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-              </button>
-              <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                  {% if user.is_authenticated %}
-                    <li class="nav-item">
-                      <span class="nav-link">Hello, {{user.first_name}}</span>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link btn btn-danger" href="/store/store_page">Products</a>
-                    </li>
-                    
-                    <li class="nav-item dropdown">
-                      <a class="nav-link dropdown-toggle btn btn-danger" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Account
-                      </a>
-                      <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                        <li><a class="dropdown-item" href="/store/account_info">Profile</a></li>
-                        <li><a class="dropdown-item" href="/store/orders">Orders</a></li>
-                        <li><a class="dropdown-item" href="/store/chatbot">Support</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item text-danger" href="/store/logout">Logout</a></li>
-                      </ul>
-                    </li>
-                  {% else %}
-                    <li class="nav-item">
-                      <a class="nav-link btn btn-primary" href="/store/login">Login</a>
-                    </li>
-                  {% endif %}
-                </ul>
+        <div class="wrapper mt-0">
+          <nav class="navbar navbar-expand-lg">
+              <div class="container-fluid">
+                <a class="navbar-brand" href="/store/home">Home</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                  <ul class="navbar-nav ms-auto">
+                    {% if user.is_authenticated %}
+                      <li class="nav-item">
+                        <span class="nav-link">Hello, {{user.first_name}}</span>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link btn btn-danger" href="/store/store_page">Products</a>
+                      </li>
+                      
+                      <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle btn btn-danger" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          Account
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                          <li><a class="dropdown-item" href="/store/account_info">Profile</a></li>
+                          <li><a class="dropdown-item" href="/store/orders">Orders</a></li>
+                          <li><a class="dropdown-item" href="/store/chatbot">Support</a></li>
+                          <li><hr class="dropdown-divider"></li>
+                          <li><a class="dropdown-item text-danger" href="/store/logout">Logout</a></li>
+                        </ul>
+                      </li>
+                    {% else %}
+                      <li class="nav-item">
+                        <a class="nav-link btn btn-primary" href="/store/login">Login</a>
+                      </li>
+                    {% endif %}
+                  </ul>
+                </div>
               </div>
-            </div>
-        </nav>
-
-        
-        
-  
-        
+          </nav>
+        </div>
 
     </header>
 
